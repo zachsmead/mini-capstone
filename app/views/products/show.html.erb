@@ -1,0 +1,37 @@
+<h1>Your Product</h1>
+
+<br />
+
+<h3><%= @product.sale_message %></h3>
+<br />
+<br />
+
+<div class=<%= @product.discount_style %>>
+	Price: $<%= @product.price %>
+	<br />
+	<br />
+	Tax: $<%= @product.tax %>
+	<br />
+	<br />
+	Total: $<%= @product.total %>
+</div>
+
+<br />
+<br />
+
+<%= @product.inspect %>
+
+<br />
+<br />
+
+<%= link_to "Delete this product", "/products/#{@product.id}", method: :delete %>
+
+<br />
+<br />
+
+<%= link_to "Edit this product", "/products/#{@product.id}/edit", method: :get %>
+
+<br />
+<br />
+
+<%= link_to "Return to index", "/products", method: :get %>
