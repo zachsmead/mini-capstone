@@ -23,8 +23,8 @@ class ProductsController < ApplicationController
 	# end
 
 	def create
-		@new_product = Product.create(name:params[:name], price:params[:price],
-			image:params[:image], description:params[:description], in_stock:params[:in_stock])
+		@new_product = Product.create(name:params[:name], price:params[:price], 
+			image:params[:image], description:params[:description], in_stock:params[:in_stock], supplier_id:params[:supplier_id])
 
 		redirect_to "/products/#{@new_product.id}"
 
@@ -54,9 +54,30 @@ class ProductsController < ApplicationController
 
 	def update
 		@product = Product.find_by(id: params[:id])
+
+		puts "*" * 100
+		puts params[:supplier_id]
+		puts "*" * 100
+
 	
-		@product.update(name: params[:name], price:params[:price], image:params[:image], description:params[:description],
-			in_stock:params[:in_stock])
+		@product.update_attributes(
+			name: params[:name],
+			price: params[:price],
+			image: params[:image],
+			description: params[:description],
+			in_stock: params[:in_stock],
+			supplier_id: params[:supplier_id]
+		)
+		p @product.inspect
+		@product.save
+		p @product.inspect
+
+
+
+		puts "*" * 100
+		puts @product.supplier_id
+		puts "*" * 100
+
 
 		redirect_to "/products/#{@product.id}"
 
