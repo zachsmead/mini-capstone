@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # Index and show
   get "/products" => "products#index"
   get "/products/:id" => "products#show"
+  get "/products/random" => "products#random"
   delete "/products/:id" => "products#destroy"
 
   
@@ -17,5 +18,7 @@ Rails.application.routes.draw do
   # Edit and Update
   get "/products/:id/edit" => "products#edit"
   patch "/products/:id" => "products#update"
+
+  post "/search" => "products#search"
 
 end

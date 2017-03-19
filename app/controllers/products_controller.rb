@@ -1,12 +1,26 @@
 class ProductsController < ApplicationController
 
-	def products
-		@title = "Products:"
-		@products = Product.all
+	def index
+		sort = params[:sort]
+		order = params[:order]
+		showing = params[:showing]
+
+		if sort && order
+			@products = Product.all.order(sort => order)
+		elsif showing
+			@products = Product.where("price < ?", 2.00)
+		else
+			@products = Product.all
+		end
 	end
 
 	def new
 	end
+
+	# def sort
+	# 	order = params[:order]
+	# 	@products = Product.all.order(:price => order)
+	# end
 
 	def create
 		@new_product = Product.create(name:params[:name], price:params[:price],
@@ -18,19 +32,25 @@ class ProductsController < ApplicationController
 		flash[:success] = "Product created!"
 	end
 
-	def index
-		@products = Product.all
-	end
+
 
 	def show
 		product_id = params[:id]
-		@product = Product.find_by(id: product_id)
+		if product_id == "random"
+			@product = Product.all.sample
+		else
+			@product = Product.find_by(id: product_id)
+		end
 	end
+
+
 
 	def edit
 		product_id = params[:id]
 		@product = Product.find_by(id: product_id)
 	end
+
+
 
 	def update
 		@product = Product.find_by(id: params[:id])
@@ -43,6 +63,8 @@ class ProductsController < ApplicationController
 		flash[:info] = "Product updated!"
 	end
 
+
+
 	def destroy
 		@product = Product.find_by(id: params[:id])
 
@@ -51,6 +73,12 @@ class ProductsController < ApplicationController
 		redirect_to "/products"
 
 		flash[:danger] = "Product deleted!"
+	end
+
+	def search
+		search_term = params[:search_term]
+		@products = Product.where("name ILIKE ?", "%#{search_term}%")
+		render :index
 	end
 
 end

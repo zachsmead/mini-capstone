@@ -22,3 +22,11 @@
 <%= form_tag "/products/new", method: :get do %>
 	<input type="submit" value="Add a new product">
 <% end %>
+
+<%= form_tag "/search", method: :post do %>
+	<input type="text" name="search_term">
+	<input type="submit" value="Search for a product">
+<% end %>
+
+<br />
+<br />

@@ -28,10 +28,24 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li class="active"><a href="/products/new">Add new product <span class="sr-only">(current)</span></a></li>		        
+		        <li class="active"><a href="/products/new">Add new product <span class="sr-only">(current)</span></a></li>
+		        <li class="active"><a href="/products?showing=discount">Show discount products <span class="sr-only">(current)</span></a></li>
+		        <li class="active"><a href="/products?sort=price&order=asc">Sort all by price (ASC) <span class="sr-only">(current)</span></a></li>		        
+		        <li class="active"><a href="/products?sort=price&order=desc">Sort all by price (DESC) <span class="sr-only">(current)</span></a></li>		        
+		        <li class="active"><a href="/products/random">Show a random product <span class="sr-only">(current)</span></a></li>		        
 		      </ul>
 		      
-		      <ul class="nav navbar-nav navbar-right">		        
+		      <ul class="nav navbar-nav navbar-right">
+
+						<div class="col-lg-6">
+					    <div class="input-group">
+					      <span class="input-group-btn">
+					        <button class="btn btn-default" type="button">Go!</button>
+					      </span>
+					      <input type="text" class="form-control" placeholder="Search for...">
+					    </div><!-- /input-group -->
+					  </div><!-- /.col-lg-6 -->
+
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
