@@ -1,0 +1,41 @@
+<h1>Suppliers</h1>
+
+<% @suppliers.each_slice(3) do |three_suppliers| %>
+	<div class="row">
+		<% three_suppliers.each do |supplier| %>
+			<div class="col-md-4 index-box">
+				<div class="well">
+					<a href="/suppliers/<%= supplier.id %>">
+						<h2><%= supplier.name %></h2>
+						<h3><%= supplier.email %></h3>
+						<h3><%= supplier.phone %></h3>
+					</a>
+				</div>
+			</div>
+		<% end %>
+	</div>
+<% end %>
+
+<br />
+<br />
+
+<div class="index-box">
+	<%= form_tag "/suppliers/new", method: :get do %>
+		<input type="submit" value="Add a new supplier">
+	<% end %>
+
+	<br />
+
+	<%= form_tag "/products", method: :get do %>
+		<input type="submit" value="View products">
+	<% end %>
+
+	<br />
+
+	<%= form_tag "/supplier_search", method: :post do %>
+		<input type="text" name="search_term">
+		<input type="submit" value="Search for a supplier">
+	<% end %>
+</div>
+
+<br />

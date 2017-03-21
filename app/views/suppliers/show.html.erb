@@ -1,0 +1,32 @@
+<h1>Supplier info</h1>
+<br />
+
+
+ID: <%= @supplier.id %>
+<br /><br />
+Name: <%= @supplier.name %>
+<br /><br />
+Email: <%= @supplier.email %>
+<br /><br />
+Phone: <%= @supplier.phone %>
+<br /><br /><br /><br />
+
+
+<%= form_tag "/suppliers/#{@supplier.id}", method: :delete do %>
+	<input type="submit" value="Delete this supplier">
+<% end %>
+
+<br />
+
+<%= form_tag "/suppliers/#{@supplier.id}/edit", method: :get do %>
+	<input type="submit" value="Edit this supplier">
+<% end %>
+
+<br />
+
+<%= form_tag "/suppliers", method: :get do %>
+	<input type="submit" value="Return to index">
+<% end %>
+
+<br />
+<br />

@@ -17,10 +17,7 @@ class ProductsController < ApplicationController
 	def new
 	end
 
-	# def sort
-	# 	order = params[:order]
-	# 	@products = Product.all.order(:price => order)
-	# end
+
 
 	def create
 		@new_product = Product.create(name:params[:name], price:params[:price], 
@@ -58,7 +55,6 @@ class ProductsController < ApplicationController
 		puts "*" * 100
 		puts params[:supplier_id]
 		puts "*" * 100
-
 	
 		@product.update_attributes(
 			name: params[:name],
@@ -68,16 +64,6 @@ class ProductsController < ApplicationController
 			in_stock: params[:in_stock],
 			supplier_id: params[:supplier_id]
 		)
-		p @product.inspect
-		@product.save
-		p @product.inspect
-
-
-
-		puts "*" * 100
-		puts @product.supplier_id
-		puts "*" * 100
-
 
 		redirect_to "/products/#{@product.id}"
 

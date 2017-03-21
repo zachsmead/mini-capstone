@@ -1,7 +1,10 @@
 class Product < ApplicationRecord
 
+	belongs_to :supplier
+	has_many :images
+
 	def sale_message
-		if price < 2
+		if price && price < 2
 			return "Discount item!"
 		else
 			return "Everyday price!"
@@ -9,15 +12,19 @@ class Product < ApplicationRecord
 	end
 
 	def tax
-		return price * 0.09
+		if price
+			return price * 0.09
+		end
 	end
 
 	def total
-		return price + tax
+		if price && tax
+			return price + tax
+		end
 	end
 
 	def discount_style
-		if price < 2
+		if price && price < 2
 			return "discount"
 		else
 			return "everyday-price"

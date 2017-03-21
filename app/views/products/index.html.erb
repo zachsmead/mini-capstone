@@ -4,11 +4,11 @@
 	<div class="row">
 		<% three_products.each do |product| %>
 			<div class="col-md-4 index-box">
-				<div class="well">
+				<div class="well uniform">
 					<a href="/products/<%= product.id %>">
 						<h2><%= product.name %></h2>
 						<div>
-							<img src="<%= product.image %>" id="box-image">
+							<img src="<%= product.images.first.src %>" id="box-image">
 						</div>
 					</a>
 				</div>
@@ -19,14 +19,24 @@
 
 <br />
 
-<%= form_tag "/products/new", method: :get do %>
-	<input type="submit" value="Add a new product">
-<% end %>
+<div class="index-box">
+	<%= form_tag "/products/new", method: :get do %>
+		<input type="submit" value="Add a new product">
+	<% end %>
 
-<%= form_tag "/search", method: :post do %>
-	<input type="text" name="search_term">
-	<input type="submit" value="Search for a product">
-<% end %>
+	<br />
+
+	<%= form_tag "/suppliers", method: :get do %>
+		<input type="submit" value="View suppliers">
+	<% end %>
+
+	<br />
+
+	<%= form_tag "/search", method: :post do %>
+		<input type="text" name="search_term">
+		<input type="submit" value="Search for a product">
+	<% end %>
+</div>
 
 <br />
 <br />

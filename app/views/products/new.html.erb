@@ -1,4 +1,5 @@
 <h1>Make a new product:</h1>
+<br /><br />
 
 <%= form_tag "/products", method: :post do %>
 	Product name: <input type="text" name="name">
@@ -9,3 +10,11 @@
 	Supplier ID: <input type="decimal" name="supplier_id">
 	<input type="submit" value="Create">
 <% end %>
+
+<br /><br />
+
+<%= form_tag "/products", method: :get do %>
+	<input type="submit" value="Back to index">
+<% end %>
+
+<br /><br />
