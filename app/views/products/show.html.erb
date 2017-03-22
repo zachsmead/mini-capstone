@@ -1,8 +1,8 @@
-<h1>Your Product</h1>
+<h1><%= @product.name %></h1>
 
 <br />
 
-<div>
+<div class="text-center">
 	<div>
 		<% @product.images.each do |image| %>
 			<img src="<%= image.src %>" id="show-image">
@@ -41,7 +41,7 @@
 <br />
 <br />
 
-Supplier: <%= @product.supplier.name %>
+Supplier: <a href="/suppliers/<%= @product.supplier.id %>" ><%= @product.supplier.name %></a>
 
 <br />
 <br />
@@ -61,6 +61,13 @@ Supplier: <%= @product.supplier.name %>
 
 <%= form_tag "/products", method: :get do %>
 	<input type="submit" value="Return to index">
+<% end %>
+
+<br />
+<br />
+
+<%= form_tag "/products/#{@product.id}/images/new", method: :get do %>
+	<input type="submit" value="Add an image for this product">
 <% end %>
 
 <br />

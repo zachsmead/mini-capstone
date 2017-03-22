@@ -39,7 +39,13 @@
 							<div>
 								<input type="submit" value="Search for a product">
 							</div>
-						<% end %></li>	        
+						<% end %></li>	       
+
+						<% if current_user %> 
+		        	<li class="active"><a href="/logout">Logout <span class="sr-only">(current)</span></a></li>
+			      <% else %>
+			        <li class="active"><a href="/login">Login <span class="sr-only">(current)</span></a></li>
+		        <% end %>
 		      </ul>
 		      
 		      <ul class="nav navbar-nav navbar-right">
@@ -50,11 +56,11 @@
 		</nav>
 
 
-    <div class="container">
+    <div class="container text-center">
       <% flash.each do |name, message| %>
         <div class="alert alert-<%= name %> alert-dismissable" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <%= message %> 
+          <h3><%= message %></h3>
         </div>
       <% end %>
     </div>

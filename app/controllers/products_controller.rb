@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!
 
 	def index
 		sort = params[:sort]
@@ -21,7 +22,7 @@ class ProductsController < ApplicationController
 
 	def create
 		@new_product = Product.create(name:params[:name], price:params[:price], 
-			image:params[:image], description:params[:description], in_stock:params[:in_stock], supplier_id:params[:supplier_id])
+			description:params[:description], in_stock:params[:in_stock], supplier_id:params[:supplier_id])
 
 		redirect_to "/products/#{@new_product.id}"
 
@@ -59,7 +60,6 @@ class ProductsController < ApplicationController
 		@product.update_attributes(
 			name: params[:name],
 			price: params[:price],
-			image: params[:image],
 			description: params[:description],
 			in_stock: params[:in_stock],
 			supplier_id: params[:supplier_id]

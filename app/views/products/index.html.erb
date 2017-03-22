@@ -8,7 +8,11 @@
 					<a href="/products/<%= product.id %>">
 						<h2><%= product.name %></h2>
 						<div>
-							<img src="<%= product.images.first.src %>" id="box-image">
+							<% if product.images.first %>
+								<img src="<%= product.images.first.src %>" id="box-image">
+							<% else %>
+								<%= link_to "Add an image for this product", "/products/#{product.id}/images/new", method: :get %>
+							<% end %>
 						</div>
 					</a>
 				</div>

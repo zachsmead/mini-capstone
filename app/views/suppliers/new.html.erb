@@ -1,12 +1,30 @@
 <h1>Add a new supplier:</h1>
 <br /><br />
 
-<%= form_tag "/suppliers", method: :post do %>
-	Supplier name: <input type="text" name="name">
-	Email: <input type="text" name="email">
-	Phone: <input type="text" name="phone">
-	<input type="submit" name="Add">	
-<% end %>
+<div class="row">
+	<div class="col-sm-3 col-centered text-center well">
+		<div class="user-input-box">
+
+			<%= form_tag "/suppliers", method: :post do %>
+				<div>
+					Supplier name: <input type="text" name="name">
+				</div>
+
+				<div>
+					Email: <input type="text" name="email">
+				</div>
+
+				<div>
+					Phone: <input type="text" name="phone">
+				</div>
+
+				<input type="submit" name="Add">	
+			<% end %>
+
+		</div>
+	</div>
+</div>
+
 
 <br /><br />
 

@@ -12,6 +12,15 @@ Phone: <%= @supplier.phone %>
 <br /><br /><br /><br />
 
 
+Products from this supplier:<br />
+<ul>
+	<% @supplier.products.each do |product| %>
+		<li><a href="/products/<%= product.id %>"><%= product.name %></a></li>
+	<% end %>
+</ul>
+<br /><br /><br /><br />
+
+
 <%= form_tag "/suppliers/#{@supplier.id}", method: :delete do %>
 	<input type="submit" value="Delete this supplier">
 <% end %>

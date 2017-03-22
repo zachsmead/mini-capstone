@@ -1,14 +1,38 @@
 <h1>Edit Product</h1>
 <br /><br />
 
-<%= form_tag "/products/#{@product.id}", method: :patch do %>
-	Product name: <input type="text" name="name" value="<%= @product.name %>">
-	Price: <input type="text" name="price" value="<%= @product.price %>">
-	Image: <input type="text" name="image" value="<%= @product.image %>">
-	Description: <input type="text" name="description" value="<%= @product.description %>">
-	In-stock: <input type="text" name="in_stock" value="<%= @product.in_stock %>">
-	Supplier ID: <input type="decimal" name="supplier_id" value="<%= @product.supplier_id %>">
-	<input type="submit" value="Update">
-<% end %>
+<div class="row">
+	<div class="col-sm-3 col-centered text-center well">
+		<div class="user-input-box">
+
+			<%= form_tag "/products/#{@product.id}", method: :patch do %>
+				<div>
+					Product name: <input type="text" name="name" value="<%= @product.name %>">
+				</div>
+
+				<div>
+					Price: <input type="text" name="price" value="<%= @product.price %>">
+				</div>
+
+				<div>
+					Description: <input type="text" name="description" value="<%= @product.description %>">
+				</div>
+
+				<div>
+					In-stock: <input type="text" name="in_stock" value="<%= @product.in_stock %>">
+				</div>
+
+				<div>
+					Supplier ID: <input type="decimal" name="supplier_id" value="<%= @product.supplier_id %>">
+				</div>
+				<input type="submit" value="Update">
+			<% end %>
+
+		</div>
+	</div>
+</div>
+
 
 <br /><br />
+
+	

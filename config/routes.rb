@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  # Products
+
   root to: "products#index"
 
   get "/scss_example" => "products#scss_example"
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
   post "/search" => "products#search"
 
   #------------------------------------------
+  # Suppliers
 
   # Create and post new suppliers
   get "/suppliers/new" => "suppliers#new"
@@ -39,5 +42,20 @@ Rails.application.routes.draw do
   post "/supplier_search" => "suppliers#search"
 
   #------------------------------------------
+  # Images
+  get "/products/:id/images/new" => "images#new"
+  post "/products/:id/images" => "images#create"
+
+  #------------------------------------------
+  # Signup
+  get "/signup" => "users#new"
+  post "/users" => "users#create"
+
+  #------------------------------------------
+  # Login
+  get "/login" => "sessions#new"
+  post "/login" => "sessions#create"
+  get "/logout" => "sessions#destroy"
+
 
 end
