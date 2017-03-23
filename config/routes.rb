@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get "/products/new" => "products#new"
   post "/products" => "products#create"
 
+  # Search
+  post "/search" => "products#search"
+  get "/search" => "products#search"
+
   # Index and show
   get "/products" => "products#index"
   get "/products/:id" => "products#show"
@@ -21,7 +25,6 @@ Rails.application.routes.draw do
   get "/products/:id/edit" => "products#edit"
   patch "/products/:id" => "products#update"
 
-  post "/search" => "products#search"
 
   #------------------------------------------
   # Suppliers

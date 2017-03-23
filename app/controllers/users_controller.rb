@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 			email: params[:email],
 			password: params[:password],
 			password_confirmation: params[:password_confirmation]
-			)
+		)
 
 		if user.save
 			session[:user_id] = user.id
@@ -20,6 +20,5 @@ class UsersController < ApplicationController
 			redirect_to "/signup"
 		end
 	end
-
 
 end

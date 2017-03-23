@@ -2,11 +2,24 @@ class SuppliersController < ApplicationController
   before_action :authenticate_user!
 
 	def index
-		@suppliers = Supplier.all
+		sort = params[:sort]
+		order = params[:order]
+
+		if sort && order
+			@suppliers = Supplier.all.order(sort => order)
+		else
+			@suppliers = Supplier.all
+		end
 	end
 
 	def show
 		@supplier = Supplier.find_by(id: params[:id])
+
+		if (@supplier.number_of_products == 0 || @supplier.number_of_products == nil)
+			@product_list_title = "This supplier has no products right now."
+		else
+			@product_list_title = "Products from this supplier:"
+		end
 	end
 
 	def new
@@ -30,7 +43,8 @@ class SuppliersController < ApplicationController
 		@supplier.update(
 			name: params[:name],
 			email: params[:email],
-			phone: params[:phone]
+			phone: params[:phone],
+			number_of_products: @supplier.products.length || 0
 		)
 
 		redirect_to "/suppliers/#{@supplier.id}"

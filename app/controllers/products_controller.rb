@@ -70,6 +70,12 @@ class ProductsController < ApplicationController
 			supplier_id: params[:supplier_id]
 		)
 
+		@supplier = Supplier.find_by(id: params[:supplier_id])
+
+		@supplier.update(
+			number_of_products: @supplier.products.length
+		)
+
 		redirect_to "/products/#{@product.id}"
 
 		flash[:info] = "Product updated!"
@@ -90,7 +96,7 @@ class ProductsController < ApplicationController
 	def search
 		search_term = params[:search_term]
 		@products = Product.where("name ILIKE ?", "%#{search_term}%")
-		render :index
+		render 'index.html.erb'
 	end
 
 end

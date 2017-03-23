@@ -7,7 +7,7 @@
 
 			<%= form_tag "/products/#{@product.id}", method: :patch do %>
 				<div>
-					Product name: <input type="text" name="name" value="<%= @product.name %>">
+					Name: <input type="text" name="name" value="<%= @product.name %>">
 				</div>
 
 				<div>
@@ -23,7 +23,18 @@
 				</div>
 
 				<div>
-					Supplier ID: <input type="decimal" name="supplier_id" value="<%= @product.supplier_id %>">
+					Supplier:
+					<%=
+						collection_select(
+							:product, 		# this is what the params get applied to by this form.
+							:supplier_id, # this is what we send the input to for this product.
+							Supplier.all, # this is the group of objects we're displaying from, into the dropdown.
+							:id, 					# this is what we are taking from each Supplier.
+							:name, 				# this is what we are displaying to represent each Supplier.
+							prompt: "Select a Supplier"
+						) 
+
+					%>
 				</div>
 
 				<br />

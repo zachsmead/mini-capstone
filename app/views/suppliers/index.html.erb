@@ -10,6 +10,11 @@
 						<h2><%= supplier.name %></h2>
 						<h3><%= supplier.email %></h3>
 						<h3><%= supplier.phone %></h3>
+						<% if supplier.products.length != 1 %>
+							<h3><%= supplier.products.length %> Products</h3>
+						<% else %>
+							<h3><%= supplier.products.length %> Product</h3>
+						<% end %>
 					</a>
 				</div>
 			</div>
