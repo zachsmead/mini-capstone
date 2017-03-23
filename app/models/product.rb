@@ -31,4 +31,12 @@ class Product < ApplicationRecord
 		end
 	end
 
+	def in_stock?
+		if self.in_stock
+			return "Yes"
+		else
+			return "Sorry, we're out right now!"
+		end
+	end
+
 end

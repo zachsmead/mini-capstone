@@ -2,6 +2,8 @@
 
 <br />
 
+<center>
+
 <div class="text-center">
 	<div>
 		<% @product.images.each do |image| %>
@@ -10,26 +12,28 @@
 	</div>
 </div>
 
-<br />
-<br />
-
 
 
 <br />
 <br />
 
 <h3><%= @product.sale_message %></h3>
+
 <br />
 <br />
 
-<div class=<%= @product.discount_style %>>
-	Price: $<%= @product.price %>
-	<br />
-	<br />
-	Tax: $<%= @product.tax %>
-	<br />
-	<br />
-	Total: $<%= @product.total %>
+
+
+<div class="text-center">
+	<div class=<%= @product.discount_style %>>
+		<b>Price:</b> $<%= @product.price %>
+		<br />
+		<br />
+		<b>Tax:</b> $<%= @product.tax %>
+		<br />
+		<br />
+		<b>Total:</b> $<%= @product.total %>
+	</div>
 </div>
 
 <br />
@@ -41,34 +45,38 @@
 <br />
 <br />
 
-Supplier: <a href="/suppliers/<%= @product.supplier.id %>" ><%= @product.supplier.name %></a>
+<b>Supplier:</b> <a href="/suppliers/<%= @product.supplier.id %>" ><%= @product.supplier.name %></a>
 
 <br />
 <br />
 <br />
 
-<%= form_tag "/products/#{@product.id}", method: :delete do %>
-	<input type="submit" value="Delete this product">
-<% end %>
+<div class="text-center">
+	<%= form_tag "/products/#{@product.id}", method: :delete do %>
+		<input type="submit" value="Delete this product">
+	<% end %>
+
+	<br />
+
+	<%= form_tag "/products/#{@product.id}/edit", method: :get do %>
+		<input type="submit" value="Edit this product">
+	<% end %>
+
+	<br />
+
+	<%= form_tag "/products", method: :get do %>
+		<input type="submit" value="Return to index">
+	<% end %>
+
+	<br />
+	<br />
+
+	<%= form_tag "/products/#{@product.id}/images/new", method: :get do %>
+		<input type="submit" value="Add an image for this product">
+	<% end %>
+</div>
 
 <br />
-
-<%= form_tag "/products/#{@product.id}/edit", method: :get do %>
-	<input type="submit" value="Edit this product">
-<% end %>
-
 <br />
 
-<%= form_tag "/products", method: :get do %>
-	<input type="submit" value="Return to index">
-<% end %>
-
-<br />
-<br />
-
-<%= form_tag "/products/#{@product.id}/images/new", method: :get do %>
-	<input type="submit" value="Add an image for this product">
-<% end %>
-
-<br />
-<br />
+</center>

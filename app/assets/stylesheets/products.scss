@@ -20,6 +20,8 @@ h1{
 	text-align: center;
 }
 
+// Image stuff
+
 #box-image {
 	width: 120px;
 }
@@ -28,6 +30,8 @@ h1{
 	width: 250px;
 }
 
+// Pricing 
+
 .discount {
 	color: red;
 }
@@ -35,3 +39,10 @@ h1{
 .everyday-price {
 	color: black;
 }
+
+.alert {
+	max-width: 450px;
+	padding-left: 25px;
+	text-align: center; 
+}
+

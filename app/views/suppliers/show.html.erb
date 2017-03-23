@@ -2,40 +2,70 @@
 <br />
 
 
-ID: <%= @supplier.id %>
-<br /><br />
-Name: <%= @supplier.name %>
-<br /><br />
-Email: <%= @supplier.email %>
-<br /><br />
-Phone: <%= @supplier.phone %>
+
+<div class="text-center">
+	<h3>
+		<b>ID:</b> <%= @supplier.id %>
+		<br /><br />
+		<b>Name:</b> <%= @supplier.name %>
+		<br /><br />
+		<b>Email:</b> <%= @supplier.email %>
+		<br /><br />
+		<b>Phone:</b> <%= @supplier.phone %>
+	</h3>
+
+
+</div>
+
+
 <br /><br /><br /><br />
 
 
-Products from this supplier:<br />
-<ul>
-	<% @supplier.products.each do |product| %>
-		<li><a href="/products/<%= product.id %>"><%= product.name %></a></li>
-	<% end %>
-</ul>
+<div class="col-md-3 col-centered text-center">
+	<h3>
+		Products from this supplier:
+
+		<br /><br />
+
+			<% @supplier.products.each do |product| %>
+				<div>
+					<a href="/products/<%= product.id %>"><%= product.name %></a>
+					<br /><br />
+				</div>
+			<% end %>
+
+	</h3>
+
+</div>
+
 <br /><br /><br /><br />
 
+<div class="col-md-2 col-centered text-center">
+	<div>
+		<%= form_tag "/suppliers/#{@supplier.id}", method: :delete do %>
+			<input type="submit" value="Delete this supplier">
+		<% end %>
+	</div>
 
-<%= form_tag "/suppliers/#{@supplier.id}", method: :delete do %>
-	<input type="submit" value="Delete this supplier">
-<% end %>
+	<br />
+
+	<div>
+		<%= form_tag "/suppliers/#{@supplier.id}/edit", method: :get do %>
+			<input type="submit" value="Edit this supplier">
+		<% end %>
+	</div>
+
+	<br />
+
+	<div>
+		<%= form_tag "/suppliers", method: :get do %>
+			<input type="submit" value="Return to index">
+		<% end %>
+	</div>
+
+</div>
 
 <br />
-
-<%= form_tag "/suppliers/#{@supplier.id}/edit", method: :get do %>
-	<input type="submit" value="Edit this supplier">
-<% end %>
-
 <br />
 
-<%= form_tag "/suppliers", method: :get do %>
-	<input type="submit" value="Return to index">
-<% end %>
 
-<br />
-<br />

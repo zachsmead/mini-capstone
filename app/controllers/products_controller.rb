@@ -21,8 +21,13 @@ class ProductsController < ApplicationController
 
 
 	def create
+
 		@new_product = Product.create(name:params[:name], price:params[:price], 
-			description:params[:description], in_stock:params[:in_stock], supplier_id:params[:supplier_id])
+			description:params[:description], in_stock:params[:in_stock], supplier_id:params[:product][:supplier_id])
+
+		@product_image = Image.create(src: params[:src], product_id: @new_product.id)
+
+
 
 		redirect_to "/products/#{@new_product.id}"
 

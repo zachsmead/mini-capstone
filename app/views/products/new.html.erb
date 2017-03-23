@@ -15,7 +15,7 @@
 				</div>
 
 				<div>
-					Image: <input type="text" name="image">
+					Image: <input type="text" name="src">
 				</div>
 
 				<div>
@@ -26,9 +26,25 @@
 					In-stock: <input type="text" name="in_stock">
 				</div>
 
-				<div>
+				<!-- <div>
 					Supplier ID: <input type="decimal" name="supplier_id">
+				</div> -->
+
+				<div>
+					Supplier:
+					<%=
+						collection_select(
+							:product, 		# this is what the params get applied to by this form.
+							:supplier_id, # this is what we send the input to for this product.
+							Supplier.all, # this is the group of objects we're displaying from into the dropdown.
+							:id, 					# this is what we are taking from each Supplier.
+							:name, 				# this is what we are displaying to represent each Supplier.
+							prompt: "Select a Supplier"
+						) 
+
+					%>
 				</div>
+
 
 				<input type="submit" value="Create">
 			<% end %>
@@ -39,9 +55,11 @@
 
 <br /><br />
 
-<%= form_tag "/products", method: :get do %>
-	<input type="submit" value="Back to index">
-<% end %>
+<div class="text-center">
+	<%= form_tag "/products", method: :get do %>
+		<input type="submit" value="Back to index">
+	<% end %>
+</div>
 
 <br /><br />
 

@@ -1,12 +1,27 @@
-<h1>Products</h1>
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Viewing options
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="/products?sort=price&order=asc">Sort by price (Ascending)</a></li>
+      <li><a href="/products?sort=price&order=desc">Sort by price (Descending)</a></li>
+      <li><a href="/products?showing=discount">Show discount items</a></li>
+      <li><a href="/products/random">Look at a random item</a></li>
+    </ul>
+  </div>
 
-<% @products.each_slice(3) do |three_products| %>
+
+<br />
+<h1>Products</h1>
+<br />
+
+<% @products.each_slice(4) do |four_products| %>
 	<div class="row">
-		<% three_products.each do |product| %>
-			<div class="col-md-4 index-box">
+		<% four_products.each do |product| %>
+			<div class="col-sm-3 index-box">
 				<div class="well uniform">
 					<a href="/products/<%= product.id %>">
 						<h2><%= product.name %></h2>
+					</a>
 						<div>
 							<% if product.images.first %>
 								<img src="<%= product.images.first.src %>" id="box-image">
@@ -14,7 +29,10 @@
 								<%= link_to "Add an image for this product", "/products/#{product.id}/images/new", method: :get %>
 							<% end %>
 						</div>
-					</a>
+						<br />
+						<div>
+							<a href="/products/<%= product.id%>">$ <%="#{ product.price }"%></a>
+						</div>
 				</div>
 			</div>
 		<% end %>
@@ -24,22 +42,36 @@
 <br />
 
 <div class="index-box">
-	<%= form_tag "/products/new", method: :get do %>
-		<input type="submit" value="Add a new product">
-	<% end %>
+
+	<div class="col-sm-2 col-centered well">
+
+		<%= form_tag "/products/new", method: :get do %>
+			<input type="submit" value="Add a new product">
+		<% end %>
+
+		<br />
+
+		<%= form_tag "/suppliers", method: :get do %>
+			<input type="submit" value="View suppliers">
+		<% end %>
+
+	</div>
 
 	<br />
 
-	<%= form_tag "/suppliers", method: :get do %>
-		<input type="submit" value="View suppliers">
-	<% end %>
+	<div class="col-sm-2 col-centered well">
+		<%= form_tag "/search", method: :post do %>
+			<div>
+				<input type="text" name="search_term">
+			</div>
 
-	<br />
+			<div>
+				<input type="submit" value="Search for a product">
+			</div>
 
-	<%= form_tag "/search", method: :post do %>
-		<input type="text" name="search_term">
-		<input type="submit" value="Search for a product">
-	<% end %>
+		<% end %>
+	</div>
+
 </div>
 
 <br />
