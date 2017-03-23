@@ -27,38 +27,7 @@
 
 <br />
 
-<div class="index-box">
 
-	<div class="col-lg-2 col-centered well">
-
-		<%= form_tag "/products/new", method: :get do %>
-			<input type="submit" value="Add a new product">
-		<% end %>
-
-		<br />
-
-		<%= form_tag "/suppliers", method: :get do %>
-			<input type="submit" value="View suppliers">
-		<% end %>
-
-	</div>
-
-	<br />
-
-	<div class="col-lg-2 col-centered well">
-		<%= form_tag "/search", method: :post do %>
-			<div>
-				<input type="text" name="search_term">
-			</div>
-
-			<div>
-				<input type="submit" value="Search for a product">
-			</div>
-
-		<% end %>
-	</div>
-
-</div>
 
 <br />
 <br />
