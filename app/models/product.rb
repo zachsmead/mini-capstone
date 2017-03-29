@@ -1,8 +1,16 @@
 class Product < ApplicationRecord
 
 	belongs_to :supplier
+
 	has_many :images
-	has_many :orders
+
+	has_many :orders, through: :carted_products
+
+	has_many :carted_products
+
+	has_many :categories, through: :categorized_products
+
+	has_many :categorized_products
 
 	def sale_message
 		if price && price < 2
@@ -33,11 +41,15 @@ class Product < ApplicationRecord
 	end
 
 	def in_stock?
-		if self.in_stock
-			return "Yes"
+		if stock != nil && stock > 0
+			return "#{stock} in stock"
 		else
 			return "Sorry, we're out right now!"
 		end
+	end
+
+	def update_stock(carted_product)
+		self.stock -= carted_product.quantity
 	end
 
 end

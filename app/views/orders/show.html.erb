@@ -1,0 +1,28 @@
+<h1>Your order is confirmed<br /><br />
+
+
+Order confirmed on <%= @created_at %><br />
+
+Your order ID is <%= @order.id %><br /><br />
+
+You ordered:
+
+<%= @order.products.inspect %>
+
+<% @order.carted_products.each do |carted_product| %>
+	<% if carted_product.status == "purchased" %>
+		<%= carted_product.product.name %><br />
+		<%= carted_product.quantity %><br /><br />
+	<% end %>
+<% end %>
+
+Subtotal: <%= number_to_currency(@order.subtotal) %><br />
+Tax: <%= number_to_currency(@order.tax) %><br />
+Total: <%= number_to_currency(@order.total) %><br /><br />
+
+Email confirmation: <%= current_user.email %><br />
+
+
+
+
+</h1>

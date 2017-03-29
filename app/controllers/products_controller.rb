@@ -5,14 +5,18 @@ class ProductsController < ApplicationController
 		sort = params[:sort]
 		order = params[:order]
 		showing = params[:showing]
+		@category = params[:category]
 
 		if sort && order
 			@products = Product.all.order(sort => order)
 		elsif showing
 			@products = Product.where("price < ?", 2.00)
+		elsif @category
+			@products = Category.find_by(id: category).products
 		else
 			@products = Product.all
 		end
+
 	end
 
 	def new
@@ -22,23 +26,29 @@ class ProductsController < ApplicationController
 
 	def create
 
-		@new_product = Product.create(name:params[:name], price:params[:price], 
-			description:params[:description], in_stock:params[:in_stock], supplier_id:params[:product][:supplier_id])
+		@new_product = Product.create(
+			name:params[:name], 
+			price:params[:price], 
+			description:params[:description], 
+			stock:params[:stock], 
+			supplier_id:params[:product][:supplier_id]
+		)
 
 		@product_image = Image.create(src: params[:src], product_id: @new_product.id)
 
-
+		flash[:success] = "Product created!"
 
 		redirect_to "/products/#{@new_product.id}"
 
-
-		flash[:success] = "Product created!"
 	end
 
 
 
 	def show
 		product_id = params[:id]
+
+		@categories = Category.all
+
 		if product_id == "random"
 			@product = Product.all.sample
 		else
@@ -59,26 +69,39 @@ class ProductsController < ApplicationController
 		@product = Product.find_by(id: params[:id])
 
 		puts "*" * 100
-		puts params[:supplier_id]
+		p "Product: "
+		p @product
+		p params
 		puts "*" * 100
 	
-		@product.update_attributes(
+		@product.update(
 			name: params[:name],
 			price: params[:price],
 			description: params[:description],
-			in_stock: params[:in_stock],
-			supplier_id: params[:supplier_id]
+			stock: params[:stock] || 0,
+		  supplier_id: params[:product][:supplier_id]
 		)
 
-		@supplier = Supplier.find_by(id: params[:supplier_id])
+		puts "*" * 100
+		p "Product: "
+		p @product
+		p params
+		puts "*" * 100
+
+		@supplier = Supplier.find_by(id: params[:product][:supplier_id])
+
+		puts "*" * 100
+		p @supplier
+		puts "*" * 100
 
 		@supplier.update(
 			number_of_products: @supplier.products.length
 		)
 
+		flash[:info] = "Product updated!"
+
 		redirect_to "/products/#{@product.id}"
 
-		flash[:info] = "Product updated!"
 	end
 
 

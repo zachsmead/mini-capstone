@@ -1,0 +1,14 @@
+<h1>buy som more fruit ya dingus</h1><br /><br />
+
+<% @carted_products.each do |product| %>
+	<%= product.inspect %>
+	<%= form_tag "/cart/#{product.id}", method: :delete do %>
+		<input type="submit" value="Delete from cart">
+	<% end %>
+	<br />
+<% end %>
+
+
+<%= form_tag "/orders", method: :post do %>
+	<input type="submit" value="fruit time">
+<% end %>

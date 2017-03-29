@@ -18,4 +18,10 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     redirect_to '/login' unless current_user
   end
+
+  def categories # this is what is called, in our application.html.erb on line # 60.
+    @categories = Category.all
+  end
+  helper_method :categories # this is what allows us to actually call the method. if it is named differently than
+                            # the method on line # 22, we will get an error.
 end

@@ -1,8 +1,18 @@
 <h1><%= @product.name %></h1>
-
 <br />
 
 <center>
+
+<h3>This product is in:</h3><br />
+
+<% @categories.each do |category| %>
+	<% category.categorized_products.each do |categorized_product| %>
+		<% if categorized_product.product_id == @product.id %>
+			<h3><%= category.name %></h3>
+			<br />
+		<% end %>
+	<% end %>
+<% end %>
 
 <div class="text-center">
 	<div>
@@ -18,6 +28,7 @@
 <br />
 
 <h3><%= @product.sale_message %></h3>
+<h3><%= @product.in_stock? %></h3>
 
 <br />
 <br />
@@ -26,13 +37,13 @@
 
 <div class="text-center">
 	<div class=<%= @product.discount_style %>>
-		<b>Price:</b> $<%= @product.price %>
+		<b>Price:</b> <%= number_to_currency(@product.price) %>
 		<br />
 		<br />
-		<b>Tax:</b> $<%= @product.tax %>
+		<b>Tax:</b> <%= number_to_currency(@product.tax) %>
 		<br />
 		<br />
-		<b>Total:</b> $<%= @product.total %>
+		<b>Total:</b> <%= number_to_currency(@product.total) %>
 	</div>
 </div>
 
@@ -45,7 +56,9 @@
 <br />
 <br />
 
+<% if @product.supplier%>
 <b>Supplier:</b> <a href="/suppliers/<%= @product.supplier.id %>" ><%= @product.supplier.name %></a>
+<% end %>
 
 <br />
 <br />
@@ -78,5 +91,13 @@
 
 <br />
 <br />
+
+<%=  form_tag "/cart", method: :post do %>
+	<input type="integer" name="quantity">
+  <input type="hidden" name="product_id" value="<%=@product.id%>">
+	<input type="submit" value="Add to cart!">
+<% end %>
+
+<br /><br />
 
 </center>

@@ -11,26 +11,26 @@
 				</div>
 
 				<div>
-					Price: <input type="text" name="price" value="<%= @product.price %>">
+					Price: <input type="decimal" name="price" value="<%= @product.price %>">
 				</div>
 
 				<div>
-					Description: <input type="text" name="description" value="<%= @product.description %>">
+					Details: <input type="text" name="description" value="<%= @product.description %>">
 				</div>
 
 				<div>
-					In-stock: <input type="text" name="in_stock" value="<%= @product.in_stock %>">
+					Stock: <input type="integer" name="stock" value="<%= @product.stock %>">
 				</div>
 
 				<div>
 					Supplier:
 					<%=
 						collection_select(
-							:product, 		# this is what the params get applied to by this form.
-							:supplier_id, # this is what we send the input to for this product.
+							:product, 		# this is what object the params get applied to by this form.
+							:supplier_id, # this is takes the input to for this product object.
 							Supplier.all, # this is the group of objects we're displaying from, into the dropdown.
 							:id, 					# this is what we are taking from each Supplier.
-							:name, 				# this is what we are displaying to represent each Supplier.
+							:name, 				# this is what we are displaying in the dropdown to represent each Supplier.
 							prompt: "Select a Supplier"
 						) 
 

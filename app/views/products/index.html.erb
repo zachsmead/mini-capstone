@@ -17,7 +17,10 @@
 							<% end %>
 						</div>
 						<div>
-							<h3><a href="/products/<%= product.id%>">$ <%="#{ product.price }"%></a></h3>
+							<h3><a href="/products/<%= product.id%>"><%= number_to_currency(product.price) %></a></h3>
+						</div>
+						<div>
+							<h3><a href="/products/<%= product.id%>"><%= product.in_stock? %></a></h3>
 						</div>
 				</div>
 			</div>
@@ -26,8 +29,5 @@
 <% end %>
 
 <br />
-
-
-
 <br />
 <br />
