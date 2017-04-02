@@ -1,5 +1,6 @@
 class ImagesController < ApplicationController
   before_action :authenticate_user!
+  before_action :authenticate_admin!
 
 	def new
 		@product = Product.find_by(id: params[:id])

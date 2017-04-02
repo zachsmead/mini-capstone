@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show, :search]
+  before_action :authenticate_admin!, except: [:index, :show, :search]
 
 	def index
 		sort = params[:sort]
@@ -12,7 +13,7 @@ class ProductsController < ApplicationController
 		elsif showing
 			@products = Product.where("price < ?", 2.00)
 		elsif @category
-			@products = Category.find_by(id: category).products
+			@products = Category.find_by(id: @category).products
 		else
 			@products = Product.all
 		end
@@ -20,13 +21,13 @@ class ProductsController < ApplicationController
 	end
 
 	def new
+		@product = Product.new
+		@product_image = Image.new
 	end
-
-
 
 	def create
 
-		@new_product = Product.create(
+		@product = Product.new(
 			name:params[:name], 
 			price:params[:price], 
 			description:params[:description], 
@@ -34,11 +35,16 @@ class ProductsController < ApplicationController
 			supplier_id:params[:product][:supplier_id]
 		)
 
-		@product_image = Image.create(src: params[:src], product_id: @new_product.id)
+		@product_image = Image.new(src: params[:src], product_id: @product.id)
 
-		flash[:success] = "Product created!"
-
-		redirect_to "/products/#{@new_product.id}"
+		if @product.save
+			flash[:success] = "Product created!"
+			@product_image.save
+			redirect_to "/products/#{@product.id}"
+		else
+			flash[:danger] = "Product could not be created!"
+			render "new.html.erb"
+		end
 
 	end
 
@@ -67,40 +73,27 @@ class ProductsController < ApplicationController
 
 	def update
 		@product = Product.find_by(id: params[:id])
-
-		puts "*" * 100
-		p "Product: "
-		p @product
-		p params
-		puts "*" * 100
 	
-		@product.update(
-			name: params[:name],
-			price: params[:price],
-			description: params[:description],
-			stock: params[:stock] || 0,
-		  supplier_id: params[:product][:supplier_id]
-		)
+		@product.name = params[:name],
+		@product.price = params[:price],
+		@product.description = params[:description],
+		@product.stock = params[:stock] || 0,
+	  @product.supplier_id = params[:product][:supplier_id]
+		
+		if @product.save
+			flash[:info] = "Product updated!"
+			@supplier = Supplier.find_by(id: params[:product][:supplier_id])
+			@supplier.update(
+				number_of_products: @supplier.products.length
+			)
 
-		puts "*" * 100
-		p "Product: "
-		p @product
-		p params
-		puts "*" * 100
+			redirect_to "/products/#{@product.id}"
+		else
+			flash[:danger] = "Product could not be updated!"
 
-		@supplier = Supplier.find_by(id: params[:product][:supplier_id])
+			render 'edit.html.erb'
+		end
 
-		puts "*" * 100
-		p @supplier
-		puts "*" * 100
-
-		@supplier.update(
-			number_of_products: @supplier.products.length
-		)
-
-		flash[:info] = "Product updated!"
-
-		redirect_to "/products/#{@product.id}"
 
 	end
 

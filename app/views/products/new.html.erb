@@ -1,3 +1,16 @@
+<% if @product.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@product.errors.count, "error") %>
+		prevented the product from being saved</h2>
+
+		<ul>
+			<% @product.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
 <h1>Make a new product:</h1>
 <br /><br />
 
@@ -7,23 +20,23 @@
 
 			<%= form_tag "/products", method: :post do %>
 				<div>
-					Name: <input type="text" name="name">
+					Name: <input type="text" name="name" value="<%= @product.name %>">
 				</div>
 
 				<div>
-					Price: <input type="text" name="price">
+					Price: <input type="text" name="price" value="<%= @product.price %>">
 				</div>
 
 				<div>
-					Image: <input type="text" name="src">
+					Image: <input type="text" name="src" value="<%= @product_image.src %>">
 				</div>
 
 				<div>
-					Description: <input type="text" name="description">
+					Description: <input type="text" name="description" value="<%= @product.description %>">
 				</div>
 
 				<div>
-					Stock: <input type="text" name="stock">
+					Stock: <input type="text" name="stock" value="<%= @product.stock %>">
 				</div>
 
 				<!-- <div>

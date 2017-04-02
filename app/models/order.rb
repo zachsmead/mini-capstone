@@ -3,6 +3,10 @@ class Order < ApplicationRecord
 	has_many :products, through: :carted_products
 	has_many :carted_products
 
+	validates :subtotal, presence: true, numericality: true, numericality: { greater_than: 0 }
+	validates :tax, presence: true, numericality: true, numericality: { greater_than: 0 }
+	validates :total, presence: true, numericality: true, numericality: { greater_than: 0 }
+
 	 def calculate_subtotal(carted_products)
 	 	# return price * quantity
 	 	@subtotal = []

@@ -1,16 +1,22 @@
 class CartedProductsController < ApplicationController
 
+	before_action :authenticate_user!
+
 	def create
 
 		product_id = params[:product_id]
 		quantity = params[:quantity]
-		puts "*" * 100
-		puts quantity
-		puts "*" * 100
 
-		@cart = CartedProduct.create(user_id: current_user.id, product_id: product_id, quantity: quantity, status: "carted")
+		@carted_product = CartedProduct.new(user_id: current_user.id, product_id: product_id, quantity: quantity, status: "carted")
 
-		redirect_to "/checkout"
+		if @carted_product.save
+			flash[:info] = "Product added to cart!"
+			redirect_to "/checkout"
+		else
+			flash[:danger] = "The quantity must be greater than 0!"
+			redirect_to "/products/#{product_id}"
+		end
+
 	end
 
 	def index

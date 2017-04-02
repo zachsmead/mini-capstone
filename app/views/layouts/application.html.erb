@@ -61,8 +61,11 @@
 		            	<% categories.each do |category| %>
 		            		<li><a href="/products?category=<%= category.id %>"><%= category.name %></a></li>
 		            	<% end %>
-		            <li role="separator" class="divider"></li>
-	              <li><a href="/products/new">Add new product</a></li>
+
+		            <% if current_user && current_user.admin %>
+			            <li role="separator" class="divider"></li>
+		              <li><a href="/products/new">Add new product</a></li>
+	              <% end %>
 
 		            <li role="separator" class="divider"></li>
 					      <li><a href="/products/random">Random product</a></li>
@@ -95,9 +98,10 @@
 		            <li><a href="/suppliers?sort=name&order=asc">Sort by Name</a></li>
 		            <li><a href="/suppliers?sort=id&order=asc">Sort by ID</a></li>
 
-
-		            <li role="separator" class="divider"></li>
-		            <li><a href="/suppliers/new">Add new supplier</a></li> 
+		            <% if current_user && current_user.admin %>
+			            <li role="separator" class="divider"></li>
+			            <li><a href="/suppliers/new">Add new supplier</a></li> 
+		            <% end %>
 
 		          </ul>
 		        </li>

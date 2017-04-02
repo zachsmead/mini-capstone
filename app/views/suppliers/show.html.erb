@@ -41,19 +41,21 @@
 <br /><br /><br /><br />
 
 <div class="col-md-2 col-centered text-center">
-	<div>
-		<%= form_tag "/suppliers/#{@supplier.id}", method: :delete do %>
-			<input type="submit" value="Delete this supplier">
-		<% end %>
-	</div>
+	<% if current_user && current_user.admin %>
+		<div>
+			<%= form_tag "/suppliers/#{@supplier.id}", method: :delete do %>
+				<input type="submit" value="Delete this supplier">
+			<% end %>
+		</div>
 
-	<br />
+		<br />
 
-	<div>
-		<%= form_tag "/suppliers/#{@supplier.id}/edit", method: :get do %>
-			<input type="submit" value="Edit this supplier">
-		<% end %>
-	</div>
+		<div>
+			<%= form_tag "/suppliers/#{@supplier.id}/edit", method: :get do %>
+				<input type="submit" value="Edit this supplier">
+			<% end %>
+		</div>
+	<% end %>
 
 	<br />
 

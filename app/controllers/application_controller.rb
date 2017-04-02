@@ -11,15 +11,27 @@ class ApplicationController < ActionController::Base
     # 	@current_user = User.find_by(id: session[:user_id])
     # else
     # 	@current_user = false
-    # end   
+    # end
   end
   helper_method :current_user
 
   def authenticate_user!
-    redirect_to '/login' unless current_user
+    if !current_user
+      flash[:danger] = "You must be logged in to do that!"
+      redirect_to '/login' unless current_user
+    end
   end
 
-  def categories # this is what is called, in our application.html.erb on line # 60.
+  def authenticate_admin!
+
+    if !(current_user && current_user.admin)
+      flash[:danger] = "You must be an admin to do that!"
+      redirect_to '/'
+    end
+
+  end
+
+  def categories            # this is what gets called, in our application.html.erb on line # 60.
     @categories = Category.all
   end
   helper_method :categories # this is what allows us to actually call the method. if it is named differently than

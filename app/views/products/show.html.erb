@@ -1,3 +1,17 @@
+<% if @carted_product && @carted_product.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@carted_product.errors.count, "error") %>
+		prevented the product from being added to your cart</h2>
+
+		<ul>
+			<% @carted_product.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+
+	</div>
+<% end %>
+
 <h1><%= @product.name %></h1>
 <br />
 
@@ -65,27 +79,29 @@
 <br />
 
 <div class="text-center">
-	<%= form_tag "/products/#{@product.id}", method: :delete do %>
-		<input type="submit" value="Delete this product">
+	<% if current_user && current_user.admin %>
+		<%= form_tag "/products/#{@product.id}", method: :delete do %>
+			<input type="submit" value="Delete this product">
+		<% end %>
+
+		<br />
+
+		<%= form_tag "/products/#{@product.id}/edit", method: :get do %>
+			<input type="submit" value="Edit this product">
+		<% end %>
+
+		<br />
+
+		<%= form_tag "/products/#{@product.id}/images/new", method: :get do %>
+			<input type="submit" value="Add an image for this product">
+		<% end %>
 	<% end %>
 
 	<br />
-
-	<%= form_tag "/products/#{@product.id}/edit", method: :get do %>
-		<input type="submit" value="Edit this product">
-	<% end %>
-
 	<br />
 
 	<%= form_tag "/products", method: :get do %>
 		<input type="submit" value="Return to index">
-	<% end %>
-
-	<br />
-	<br />
-
-	<%= form_tag "/products/#{@product.id}/images/new", method: :get do %>
-		<input type="submit" value="Add an image for this product">
 	<% end %>
 </div>
 
